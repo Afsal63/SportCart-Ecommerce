@@ -1,0 +1,104 @@
+main{
+  min-height: 80vh;
+
+}
+.productCard{
+  text-decoration: none;
+}
+.header-logo{
+  font-family: 'Rancho', sans-serif;
+  text-transform: initial;  
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.tt{
+  text-decoration: none;
+ 
+}
+h3{
+  padding:1rem 0 ;
+}
+.rating span{
+  margin: 0.rem;
+}
+a{
+  cursor: pointer;
+}
+.card1{
+  overflow: hidden;
+  min-height: 30rem;
+  height: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  
+}
+h1{
+  font-size:1.8rem ;
+  padding:1rem 0;
+}
+h2{
+  font-size:1.8rem ;
+  padding: 0.5rem 0;
+}
+*{
+  margin: 0;
+  padding: 0;
+ 
+}
+
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  position: absolute;
+  bottom: -20px;
+  
+
+}
+
+.carousel-caption h2 {
+  color: rgb(24, 23, 23);
+
+}
+.car1{
+  background-color: rgb(235, 235, 235);
+}
+
+.carousel img {
+ 
+  height: auto;
+  padding: 2px;
+ margin-bottom: 15%;
+  width:400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel a {
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 2.5vw;
+  }
+}
+.row{
+  margin: 0%;
+
+}
+.crop-img-container-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  background: #1a1a1a54;
+}
+
+.crop-img-container {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  padding: 1rem;
+}
