@@ -151,22 +151,21 @@ const getUserById= asyncHandler(async(req,res)=>{
 //@route PUT /api/users/:id
 //@access Private/Admin
 
-const updateUser = asyncHandler(async(req,res)=>{
-  const {name} = req.body
+// @desc    Update user
+// @route   PUT /api/users/:id
+// @access  Private/Admin
+const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id)
-
-
+  // console.log(req.body)
 
   if (user) {
-    
     user.name = req.body.name || user.name
-
     user.email = req.body.email || user.email
-    user.isAdmin = req.body.isAdmin || user.isAdmin
-    // user.isBlocked = req.body.isBlocked || user.isBlocked
+    user.isAdmin = req.body.isAdmin
+    user.isBlocked = req.body.isBlocked
 
     const updatedUser = await user.save()
-    
+
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
@@ -180,6 +179,10 @@ const updateUser = asyncHandler(async(req,res)=>{
     throw new Error('User not found')
   }
 })
+
+
+
+
 const getUsersReport = asyncHandler(async (req, res) => {
   const users = await User.find({})
   const usersNum=users.length

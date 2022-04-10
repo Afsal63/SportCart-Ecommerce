@@ -20,26 +20,12 @@ const getProduts = asyncHandler(async (req, res) => {
 })
 
 const getProductsReport = asyncHandler(async (req, res) => {
-  const product = await Product.find({})
-  const productNum=product.length
-  const categories = await Category.find({})
-  const categoriesNum=categories.length
+  const productNum = await Product.find({}).count()
+  
+ 
 
-  const categoryData= await Product.aggregate([
-      { 
-          $group:{
-              _id:"$category",
-              qty:{$sum:1}
-          },
-      },
-      {
-          $project:{
-              category:"$_id",
-              qty:1
-          }
-      }
-  ]) 
-  res.json({productCount:productNum,categoriesCount:categoriesNum,categoryReport:categoryData})
+ 
+  res.json({productCount:productNum})
 })
 
 

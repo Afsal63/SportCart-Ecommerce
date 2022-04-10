@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { listUsers, deleteUser } from '../actions/userActions'
+import { listUsers, updateUser } from '../actions/userActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {useNavigate} from 'react-router-dom'
@@ -17,9 +17,9 @@ const UserListScreen = () => {
 
     const userLogin = useSelector((state)=>state.userLogin)
     const {userInfo}=userLogin
-  
-    const userDelete=useSelector((state)=>state.userDelete)
-    const {success:successDelete}=userDelete
+
+    const userUpdate = useSelector((state) => state.userUpdate)
+    const { success: successUpdate } = userUpdate
 
     useEffect(() => {
         if(userInfo && userInfo.isAdmin){
@@ -28,14 +28,21 @@ const UserListScreen = () => {
         }else{
  navigate('/login')
         }
-    }, [dispatch,navigate,successDelete,userInfo])
+    }, [dispatch,navigate,successUpdate,userInfo])
 
-    const deleteHandler=(id)=>{
-        if (window.confirm('Are you sure')){
+    
 
-            dispatch(deleteUser(id))
+    const blockHandler=(user) => {
+      if (window.confirm('Do you want to block this user?')) {
+          dispatch(updateUser({ ...user, isBlocked: true }))
         }
-    }
+  }
+  const unblockHandler=(user) => {
+      if (window.confirm('Unblock this user?')) {
+          dispatch(updateUser({ ...user, isBlocked: false }))
+        }
+  }
+
     return (
         <>
         <h1 className='ms-4'>Users</h1>
@@ -76,13 +83,9 @@ const UserListScreen = () => {
                         <i className='fas fa-edit'></i>
                       </Button>
                     </LinkContainer>
-                    <Button
-                      variant='danger'
-                      className='btn-sm'
-                      onClick={() => deleteHandler(user._id)}
-                    >
-                      <i className='fas fa-trash'></i>
-                    </Button>
+                    {user.isBlocked ?
+                              <Button variant ='danger' className='btn-sm' onClick={()=>unblockHandler(user)}>Unblock</Button>:
+                              <Button variant ='danger' className='btn-sm' onClick={()=>blockHandler(user)}>Block</Button>}
                   </td>
                 </tr>
               ))}

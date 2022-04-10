@@ -1,11 +1,12 @@
 import React from 'react'
-import {Form,Button} from 'react-bootstrap'
+import {Form,Button, Card} from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import Checkout from '../components/Checkout'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { saveShippingAddress } from '../actions/cartAction'
+
 
 
 const ShippingScreen = () => {
@@ -29,6 +30,7 @@ const ShippingScreen = () => {
       <FormContainer>
           <Checkout step1 step2/>
 <h1>Shipping</h1>
+<Card className='p-5'> 
 <Form onSubmit={submitHandler}>
     
  <Form.Group controlId='address'>
@@ -78,6 +80,7 @@ const ShippingScreen = () => {
 <Button className='mt-5' type='submit' variant='primary'>Continue</Button>
 
 </Form>
+</Card>
       </FormContainer>
   )
 }

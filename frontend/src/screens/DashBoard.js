@@ -198,23 +198,7 @@ const DashBoard = () => {
                                         </Card>
                                     </Col>
                                 </Row>
-                                <Row className="align-items-center justify-content-center pt-3">
-                                   <Container><h4>Categorywise Product Overview</h4></Container> 
-                                </Row>
-                                <Row className="align-items-center justify-content-center pt-3">
-                                    {data.categoryReport && data.categoryReport.map((categoryReports) =>
-                                        <Col lg={4} md={6} xs={12}>
-                                            <Card className='m-1 font-weight-bold rounded-4 shadow p-3 bg-white d-flex flex-column align-items-center justify-content-center'>
-                                                <Card.Body>
-                                                    <Card.Text className='text-center'>
-                                                        <Card.Text as="div">{categoryReports.category}</Card.Text>
-                                                        <Card.Text as="div">{categoryReports.qty}</Card.Text>
-                                                    </Card.Text>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    )}
-                                </Row>
+                                
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                                 <Row className="align-items-center justify-content-center pt-3">
