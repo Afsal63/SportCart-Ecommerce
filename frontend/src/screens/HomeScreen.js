@@ -13,7 +13,7 @@ import { Slider } from "@material-ui/core";
 import { useState } from "react";
 import axios from "axios";
 import ProductCarousel from "../components/ProductCarousel";
-const HomeScreen = () => {
+const HomeScreen = ({id}) => {
   const params = useParams();
   const keyword = params.keyword;
   const [newPrice, setNewPrice] = useState(0, 500);
@@ -30,15 +30,16 @@ const HomeScreen = () => {
     dispatch({ type: ORDER_CREATE_RESET });
   }, [dispatch, keyword, pageNumber]);
 
+
   return (
     <>
-     {!keyword ? (
-      <ProductCarousel />
+    
+     {!keyword && !id ? ( 
+      <ProductCarousel  />
     ) : (
-      <Link to='/' className='btn btn-light'>
-        Go Back
-      </Link>
-    )}
+     <p></p>
+      )}
+  
       <Container>
         {products.length !== 0 ? (
           <h1>Latest Products</h1>
@@ -67,11 +68,14 @@ const HomeScreen = () => {
                       </Col>
                     ))}
                   </Row>
-                  <Paginate
-                    pages={pages}
-                    page={page}
-                    keyword={keyword ? keyword : ""}
-                  />
+                  {!id ? (
+
+                    <Paginate
+                      pages={pages}
+                      page={page}
+                      keyword={keyword ? keyword : ""}
+                    />
+                  ): null }
                 </>
               ) : (
                 <div className="text-center m-auto">

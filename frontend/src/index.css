@@ -58,15 +58,19 @@ h2{
   
 
 }
-
+.footer{
+  margin-top: 20%;
+}
 .carousel-caption h2 {
   color: rgb(24, 23, 23);
 
 }
 .car1{
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(231, 231, 231);
 }
-
+body{
+  background-color: rgb(255, 255, 255);
+}
 .carousel img {
  
   height: auto;

@@ -12,6 +12,7 @@
     "axios": "^0.26.0",
     "cropperjs": "^1.5.12",
     "material-table": "^1.69.3",
+    "mdbreact": "^5.2.0",
     "npm": "^8.5.5",
     "react": "^17.0.2",
     "react-alert": "^7.0.3",

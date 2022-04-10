@@ -72,6 +72,7 @@ const PlaceOrderScreen = () => {
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
+            <Card className="p-5"> 
             <ListGroup.Item>
               <h2>Shippig</h2>
               <p>
@@ -130,7 +131,9 @@ const PlaceOrderScreen = () => {
                 </ListGroup>
               )}
             </ListGroup.Item>
+          </Card>
           </ListGroup>
+
         </Col>
         <Col md={4}>
           <Card>

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { removeFromWishlist } from "../actions/cartAction";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 
 const WishlistScreen = () => {
 
@@ -15,9 +15,27 @@ const WishlistScreen = () => {
   const navigate=useNavigate()
   const [qty ,setQty]=useState(1)
 
-  const removeWishlistHandler=(id)=>{
-   dispach(removeFromWishlist(id))
-  }
+  const removeWishlistHandler = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result.isConfirmed);
+
+        dispach(removeFromWishlist(id))
+      }
+    });
+  };
+
+  
+   
+  
   
 
     const addToCartHandler=(id)=>{

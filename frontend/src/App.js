@@ -31,7 +31,7 @@ const App = () => {
 
   <Header/>
         <Routes>
-         <Route path='*' element={<HomeScreen/>}></Route>
+         <Route path='*' element={<HomeScreen coursal={true} />}></Route>
           <Route path='/order/:id' element={<OrderScreen />}></Route>
           <Route path='/login' element={<LogginScreen />}></Route>
           <Route path='/placeorder' element={<PlaceOrderScreen />}></Route>

@@ -224,7 +224,7 @@ const ProductScreen = () => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type="submit" variant="primary">
+                      <Button className="mt-3" type="submit" variant="primary">
                         Submit
                       </Button>
                     </Form>
@@ -242,9 +242,9 @@ const ProductScreen = () => {
         </>
       )}
 
-      <HomeScreen />
-      <main></main>
-      <Footer />
+      <HomeScreen id={id}  />
+      
+      
     </>
   );
 };

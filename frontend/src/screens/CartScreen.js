@@ -18,6 +18,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import Swal from "sweetalert2";
 // import Header from '../components/Header'
 
 const CartScreen = () => {
@@ -36,14 +37,32 @@ const CartScreen = () => {
   }, [dispatch, id, qty]);
 
   const removeFromCartHnadler = (id) => {
-    dispatch(removeFromCart(id));
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result.isConfirmed);
+
+        dispatch(removeFromCart(id));
+      }
+    });
   };
+
+  
+  
+  
   const checkoutHandler = () => {
     navigate("/login?redirect=shipping");
   };
 
   return (
-    <Container>
+    <Container >
       <Row>
         {/* <Header/> */}
         <Col md={8}>
@@ -109,7 +128,7 @@ const CartScreen = () => {
           )}
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className="mt-3 ms-2">
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>
@@ -148,6 +167,7 @@ const CartScreen = () => {
           </Card>
         </Col>
       </Row>
+     
     </Container>
   );
 };

@@ -7,7 +7,7 @@ import { savePaymentMethod } from '../actions/cartAction'
 import { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-
+import { Card } from 'react-bootstrap'
 
 
 const PaymentScreen = () => {
@@ -32,6 +32,7 @@ const PaymentScreen = () => {
         
            
             <h1>Payment Method</h1>
+            <Card className='p-5'> 
             <Form onSubmit={submitHandler}>
                 <Form.Group>
                 <Form.Label as='legend' Select Method></Form.Label>
@@ -45,6 +46,7 @@ const PaymentScreen = () => {
                     Continue
                 </Button>
             </Form>
+            </Card>
         </FormContainer>
     )
 }
