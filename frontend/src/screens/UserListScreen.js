@@ -7,6 +7,7 @@ import { listUsers, deleteUser } from '../actions/userActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {useNavigate} from 'react-router-dom'
+import { Card } from 'react-bootstrap'
 
 const UserListScreen = () => {
     const navigate=useNavigate()
@@ -37,12 +38,13 @@ const UserListScreen = () => {
     }
     return (
         <>
-        <h1>Users</h1>
+        <h1 className='ms-4'>Users</h1>
         {loading ? (
           <Loader />
         ) : error ? (
           <Message variant='danger'>{error}</Message>
         ) : (
+<Card className='p-5'>
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
@@ -86,6 +88,7 @@ const UserListScreen = () => {
               ))}
             </tbody>
           </Table>
+          </Card>
         )}
       </>
     )

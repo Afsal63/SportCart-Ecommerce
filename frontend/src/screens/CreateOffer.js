@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { addOffer, deleteOffer, listOffers } from "../actions/offerAction";
-
+import { Card } from "react-bootstrap";
 import { OFFER_ADD_RESET } from "../constants/offerConstants";
 
 const CreateOffer = () => {
@@ -77,7 +77,7 @@ const CreateOffer = () => {
   return (
     <>
       <Container>
-        <Link to="/" className="btn btn-light my-3">
+        <Link to="/" className="btn btn-dark my-3">
           Go Back
         </Link>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -88,6 +88,7 @@ const CreateOffer = () => {
                 className="flex-column"
                 style={{ cursor: "pointer" }}
               >
+                <Card className='p-5'> 
                 <Nav.Item>
                   <Nav.Link eventKey="first" className="font-weight-bold">
                     Offers
@@ -98,6 +99,7 @@ const CreateOffer = () => {
                     Add new offer
                   </Nav.Link>
                 </Nav.Item>
+                </Card>
               </Nav>
             </Col>
             <Col sm={9}>
@@ -106,13 +108,15 @@ const CreateOffer = () => {
                   <Row>
                     <Col md={9} className="m-auto">
                       <h1>Offers</h1>
+                    
                       {/* {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : ( */}
+                     <Card> 
                       <Table
                         striped
                         bordered
                         hover
                         responsive
-                        className="table-sm tableColor"
+                        className="table-sm tableColor p-5"
                       >
                         <thead>
                           <tr>
@@ -143,6 +147,7 @@ const CreateOffer = () => {
                           ))}
                         </tbody>
                       </Table>
+                      </Card>
                     </Col>
                   </Row>
                 </Tab.Pane>
@@ -153,6 +158,7 @@ const CreateOffer = () => {
                       <h1>Add new Offer</h1>
                       {/* {success && <Message variant='success'>Offer Updated</Message>} */}
                       {/* {success && alert.show('Offer added')} */}
+                      <Card className="p-5">
                       <Form onSubmit={submitHandler}>
                         <Form.Group controlId="name">
                           <Form.Label>Name of the offer</Form.Label>
@@ -193,6 +199,7 @@ const CreateOffer = () => {
                           </Button>
                         </Row>
                       </Form>
+                      </Card>
                     </Col>
                   </Row>
                 </Tab.Pane>

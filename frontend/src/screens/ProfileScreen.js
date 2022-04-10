@@ -8,7 +8,7 @@ import Loader from '../components/Loader'
 import { getUserDetails,updateUserProfile } from '../actions/userActions'
 import { useDispatch ,useSelector} from 'react-redux'
 import { listMyOrders } from '../actions/orderActions'
-
+import { Card } from 'react-bootstrap'
 
 const ProfileScreen = () => {
     const [name, setName] = useState('')
@@ -75,6 +75,7 @@ const ProfileScreen = () => {
                 {error && <Message variant='danger'>{error}</Message>}
                 {success && <Message variant='success'>Profile Updated</Message>}
                 {loading && <Loader />}
+    <Card className='p-5'> 
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='name'>
                         <Form.Label>Name</Form.Label>
@@ -116,6 +117,7 @@ const ProfileScreen = () => {
                         Update
                     </Button>
                 </Form>
+                </Card>
             </Col>
 
      
@@ -128,6 +130,7 @@ const ProfileScreen = () => {
                     ) : errorOrders ? (
                       <Message variant='danger'>{errorOrders}</Message>
                     ) : (
+                      <Card className='p-5'> 
                       <Table striped bordered hover responsive className='table-sm tableColor'>
 
                         <thead>
@@ -184,6 +187,7 @@ const ProfileScreen = () => {
                           ))}
                         </tbody>
                       </Table>
+                      </Card>
                     )}
                   </Col>
                

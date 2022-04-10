@@ -156,78 +156,7 @@ const SalesReportScreen = () => {
               name="birthday"
             ></input>
           </Col>
-          <Col md={2}>
-            <Button className="datebutton" type="submit">
-              Find
-            </Button>
-          </Col>
-          <Col>
-            <label htmlFor="upper">Find by year</label>
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Select year"
-              onChange={(e) => {
-                e.preventDefault()
-                setYear(e.target.value)
-              }}
-            ></input>
-          </Col>
-          <Col>
-            <Button onClick={fetchDataByYear} className="datebutton">
-              Find
-            </Button>
-          </Col>
-          <Col>
-            <label htmlFor="upper">Find by month</label>
-            <Form.Control
-              as="select"
-              onChange={(e) => {
-                e.preventDefault()
-                fetchDataByMonth(e.target.value)
-              }}
-            >
-              <option name="" value="">
-                MM
-              </option>
-              <option name="January" value={1}>
-                January
-              </option>
-              <option name="February" value={2}>
-                February
-              </option>
-              <option name="March" value={3}>
-                March
-              </option>
-              <option name="April" value={4}>
-                April
-              </option>
-              <option name="May" value={5}>
-                May
-              </option>
-              <option name="June" value={6}>
-                June
-              </option>
-              <option name="July" value={7}>
-                July
-              </option>
-              <option name="August" value={8}>
-                August
-              </option>
-              <option name="September" value={9}>
-                September
-              </option>
-              <option name="October" value={10}>
-                October
-              </option>
-              <option name="November" value={11}>
-                November
-              </option>
-              <option name="December" value={12}>
-                December
-              </option>
-            </Form.Control>
-          </Col>
+          
         </Row>
       </Form>
       <MaterialTable

@@ -1,12 +1,13 @@
 import React, {}from 'react'
 import { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer, } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrders } from '../actions/orderActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import {useNavigate} from 'react-router-dom'
+import { Card } from 'react-bootstrap'
 
 const OrderListScreen = () => {
     const navigate =useNavigate()
@@ -26,20 +27,23 @@ const OrderListScreen = () => {
 
 
   return (
-    <>Order List
+    <>
+    <h1 className='ms-3'> Order List</h1>
     {loading ?(
         <Loader/>
     ): error ?(
        <Message variant='danger'>{error}</Message>
     ):(
+      <Card className='p-5'> 
     <Table striped bordered hover responsive className='table-sm'>
     <thead>
       <tr>
         <th>ID</th>
         <th>USER</th>
-        <th>DATE</th>
         <th>TOTAl</th>
+        <th>DATE</th>
         <th>PAID</th>
+        <th>SHIPPED</th>
         <th>DELIVERED</th>
 
         <th></th>
@@ -64,6 +68,19 @@ const OrderListScreen = () => {
               <i className='fas fa-times' style={{ color: 'red' }}></i>
             )}
           </td>
+
+          <td>
+            {order.isShipped ? (
+                <>
+                <i className="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                {order.paidAt.substring(0,10)}
+                </>
+            ) : (
+              <i className='fas fa-times' style={{ color: 'red' }}></i>
+            )}
+          </td>
+
+
           <td>
             {order.isDelvered ? (
             order.deliveredAt.substring(0,10)
@@ -83,6 +100,8 @@ const OrderListScreen = () => {
       ))}
     </tbody>
   </Table>
+  </Card>
+  
   )}
     
     </>

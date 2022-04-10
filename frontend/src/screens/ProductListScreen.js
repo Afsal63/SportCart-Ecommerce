@@ -15,6 +15,7 @@ import Message from "../components/Message";
 import { useNavigate } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import Swal from "sweetalert2"
+import { Card } from "react-bootstrap";
 const PriductListScreen = () => {
 const params=useParams()
   const navigate = useNavigate();
@@ -117,6 +118,7 @@ const params=useParams()
         <Message variant="danger">{error}</Message>
       ) : (
         <>
+        <Card className='p-5'> 
           <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
@@ -156,6 +158,7 @@ const params=useParams()
               ))}
             </tbody>
           </Table>
+          </Card>
           <Paginate pages={pages} page={page} isAdmin={true}/>
         </>
       )}
