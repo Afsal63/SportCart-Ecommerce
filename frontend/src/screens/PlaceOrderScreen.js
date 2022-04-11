@@ -185,6 +185,7 @@ const PlaceOrderScreen = () => {
           </Card>
         </Col>
       </Row>
+      <main></main>
     </>
   );
 };

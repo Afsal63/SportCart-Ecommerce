@@ -1,4 +1,4 @@
-import { OFFER_LIST_FAIL, OFFER_LIST_REQUEST, OFFER_LIST_SUCCESS,OFFER_ADD_REQUEST,OFFER_ADD_SUCCESS,OFFER_ADD_FAIL, OFFER_DELETE_REQUEST, OFFER_DELETE_SUCCESS, OFFER_DELETE_FAIL } from "../constants/offerConstants"
+import { OFFER_LIST_FAIL, OFFER_LIST_REQUEST, OFFER_LIST_SUCCESS,OFFER_ADD_REQUEST,OFFER_ADD_SUCCESS,OFFER_ADD_FAIL, OFFER_DELETE_REQUEST, OFFER_DELETE_SUCCESS, OFFER_DELETE_FAIL, COOPEN_ADD_REQUEST, COOPEN_ADD_SUCCESS, COOPEN_ADD_FAIL } from "../constants/offerConstants"
 import axios from 'axios'
 
 
@@ -22,6 +22,7 @@ export const listOffers = ()=>async (dispatch,getState)=>{
 
 
 export const addOffer = (offer)=>async (dispatch)=>{
+  console.log(offer);
     try {
         dispatch({type:OFFER_ADD_REQUEST})
         const config = { headers: {'Content-Type': 'application/json',},}
@@ -38,6 +39,23 @@ export const addOffer = (offer)=>async (dispatch)=>{
     }
   }  
 
+  export const addCoopen = (coopen)=>async (dispatch)=>{
+   
+    try {
+        dispatch({type:COOPEN_ADD_REQUEST})
+        const config = { headers: {'Content-Type': 'application/json',},}
+        const {data}=await axios.post('/api/coopens',coopen,config)
+        // console.log(data)
+        dispatch({type:COOPEN_ADD_SUCCESS,createSuccess:true,payload:data})
+    } catch (error) {
+        dispatch({type: COOPEN_ADD_FAIL,
+            payload:
+              error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message,
+          })
+    }
+  }  
 
 export const deleteOffer = (id) => async (dispatch, getState) => {
     try {

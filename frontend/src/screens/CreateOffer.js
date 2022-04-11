@@ -16,7 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { addOffer, deleteOffer, listOffers } from "../actions/offerAction";
+import { addCoopen, addOffer, deleteOffer, listOffers } from "../actions/offerAction";
 import { Card } from "react-bootstrap";
 import { OFFER_ADD_RESET } from "../constants/offerConstants";
 
@@ -26,7 +26,9 @@ const CreateOffer = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
+  const [coopenName, setCoopenName] = useState("");
   const [discount, setDiscount] = useState(0);
+  const [coopenDiscount, setCoopenDiscount] = useState(0);
   const [category, setCategory] = useState("Badmintion ");
 
   // const categoryList = useSelector((state) => state.categoryList)
@@ -65,6 +67,15 @@ const CreateOffer = () => {
     setCategory("");
   };
 
+  const coopenSubmitHandler = async (e) => {
+    e.preventDefault();
+    dispatch(addCoopen({ coopenName, coopenDiscount, category }));
+    // navigate("/admin/offers");
+    setCoopenName("");
+    setCoopenDiscount(0);
+    setCategory("");
+  };
+
   const deleteHandler = async (offerId) => {
     dispatch(deleteOffer(offerId));
     navigate("/admin/offers");
@@ -88,17 +99,17 @@ const CreateOffer = () => {
                 className="flex-column"
                 style={{ cursor: "pointer" }}
               >
-                <Card className='p-5'> 
-                <Nav.Item>
-                  <Nav.Link eventKey="first" className="font-weight-bold">
-                    Offers
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second" className="font-weight-bold">
-                    Add new offer
-                  </Nav.Link>
-                </Nav.Item>
+                <Card className="p-5">
+                  <Nav.Item>
+                    <Nav.Link eventKey="first" className="font-weight-bold">
+                      Offers
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="second" className="font-weight-bold">
+                      Add new offer
+                    </Nav.Link>
+                  </Nav.Item>
                 </Card>
               </Nav>
             </Col>
@@ -108,97 +119,128 @@ const CreateOffer = () => {
                   <Row>
                     <Col md={9} className="m-auto">
                       <h1>Offers</h1>
-                    
+
                       {/* {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : ( */}
-                     <Card> 
-                      <Table
-                        striped
-                        bordered
-                        hover
-                        responsive
-                        className="table-sm tableColor p-5"
-                      >
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Offers</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {offerslist.map((x) => (
+                      <Card>
+                        <Table
+                          striped
+                          bordered
+                          hover
+                          responsive
+                          className="table-sm tableColor p-5"
+                        >
+                          <thead>
                             <tr>
-                              <td>{x.name}</td>
-                              <td>{x.discount}</td>
-                              <td>
-                                <Button
-                                  size="sm"
-                                  className="sm"
-                                  onClick={() => deleteHandler(x._id)}
-                                >
-                                  <i
-                                    className="fas fa-times"
-                                    style={{ color: "red" }}
-                                  ></i>
-                                  Delete
-                                </Button>
-                              </td>
+                              <th>ID</th>
+                              <th>Offers</th>
+                              <th>Actions</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </Table>
+                          </thead>
+                          <tbody>
+                            {offerslist.map((x) => (
+                              <tr>
+                                <td>{x.name}</td>
+                                <td>{x.discount}</td>
+                                <td>
+                                  <Button
+                                    size="sm"
+                                    className="sm"
+                                    onClick={() => deleteHandler(x._id)}
+                                  >
+                                    <i
+                                      className="fas fa-times"
+                                      style={{ color: "red" }}
+                                    ></i>
+                                    Delete
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
                       </Card>
                     </Col>
                   </Row>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <Row>
-                    
                     <Col md={9} className="m-auto">
                       <h1>Add new Offer</h1>
                       {/* {success && <Message variant='success'>Offer Updated</Message>} */}
                       {/* {success && alert.show('Offer added')} */}
                       <Card className="p-5">
-                      <Form onSubmit={submitHandler}>
-                        <Form.Group controlId="name">
-                          <Form.Label>Name of the offer</Form.Label>
-                          <Form.Control
-                            type="name"
-                            placeholder="Enter name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          ></Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="discountPercentage">
-                          <Form.Label>Discount</Form.Label>
-                          <Form.Control
-                            type="name"
-                            placeholder="Enter name"
-                            value={discount}
-                            onChange={(e) => setDiscount(e.target.value)}
-                          ></Form.Control>
-                        </Form.Group>
-                        {/* <Form.Group controlId='category'>
-                          <Form.Label>Category</Form.Label>
+                        <Form onSubmit={submitHandler}>
+                          <Form.Group controlId="name">
+                            <Form.Label>Name of the offer</Form.Label>
+                            <Form.Control
+                              type="name"
+                              placeholder="Enter name"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                            ></Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="discountPercentage">
+                            <Form.Label>Discount</Form.Label>
+                            <Form.Control
+                              type="name"
+                              placeholder="Enter name"
+                              value={discount}
+                              onChange={(e) => setDiscount(e.target.value)}
+                            ></Form.Control>
+                          </Form.Group>
+
+                          <Row className="pt-2 ml-auto text-center">
+                            <Button
+                              type="submit"
+                              variant="primary"
+                              className="btn-block test"
+                              onClick={(e) => alert()}
+                            >
+                              Update
+                            </Button>
+                          </Row>
+                        </Form>
+                      </Card>
+
+                      <h1>Add new Coopen</h1>
+                      {/* {success && <Message variant='success'>Offer Updated</Message>} */}
+                      {/* {success && alert.show('Offer added')} */}
+                      <Card className="p-5">
+                        <Form onSubmit={coopenSubmitHandler}>
+                          <Form.Group controlId="name">
+                            <Form.Label>Name of the coopen</Form.Label>
+                            <Form.Control
+                              type="name"
+                              placeholder="Enter name"
+                              value={coopenName}
+                              onChange={(e) => setCoopenName(e.target.value)}
+                            ></Form.Control>
+                          </Form.Group>
+                          <Form.Group controlId="discountPercentage">
+                            <Form.Label>Discount</Form.Label>
+                            <Form.Control
+                              type="name"
+                              placeholder="Enter name"
+                              value={coopenDiscount}
+                              onChange={(e) =>
+                                setCoopenDiscount(e.target.value)
+                              }
+                            ></Form.Control>
+                          </Form.Group>
+
                          
-                          <Form.Control
-                            type='name'
-                            placeholder='Enter name'
-                            value={category}
-                            onChange={(e) => setCategory(e.target.value)}
-                          ></Form.Control>
-                        </Form.Group> */}
-                        <Row className="pt-2 ml-auto text-center">
-                          <Button
-                            type="submit"
-                            variant="primary"
-                            className="btn-block test"
-                            onClick={(e) => alert()}
-                          >
-                            Update
-                          </Button>
-                        </Row>
-                      </Form>
+
+                          <Row className="pt-2 ml-auto text-center">
+                            <Button
+                              type="submit"
+                              variant="primary"
+                              className="btn-block test"
+                              onClick={(e) => alert()}
+                            >
+                              Update
+                            </Button>
+                          </Row>
+                        </Form>
                       </Card>
                     </Col>
                   </Row>
@@ -216,6 +258,7 @@ const CreateOffer = () => {
           </Col>
         </Row> */}
       </Container>
+      <main></main>
     </>
   );
 };

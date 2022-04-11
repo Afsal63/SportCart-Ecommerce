@@ -123,7 +123,7 @@ const ProfileScreen = () => {
      
                 
               
-                  <Col className=''>
+                  <Col md={9} className=''>
                     <h2 className='text-center pt-3'>My Orders</h2>
                     {loadingOrders ? (
                       <Loader />

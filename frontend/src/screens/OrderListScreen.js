@@ -103,9 +103,7 @@ const OrderListScreen = () => {
   </Card>
   
   )}
-    {orders.length===0 ?(
     <main></main>
-          ):<div className=''></div>}
     </>
   )
 }

@@ -107,10 +107,16 @@ async function showRazorpay() {
           // alert(response.razorpay_order_id);
           // alert(response.razorpay_signature);
 
-          alert('Transaction successful')
+          Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'Your payment successfully completed',
+            showConfirmButton: false,
+            timer: 1500
+          })
       },
       prefill: {
-          name: 'Abdul manaf',
+          name: 'afsal',
           email: 'afsal@gmail.com',
           phone_number: '8136833754',
       },

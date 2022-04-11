@@ -60,7 +60,7 @@ const WishlistScreen = () => {
           <div>
             <Row>
               {wishlistItem.map((item,index) => (
-                <Card className="me-3 mt-4" key={index} style={{ width: "18rem" }}>
+                <Card className=" ms-3 me-3 mt-4" key={index} style={{ width: "18rem" }}>
                   <i  onClick={()=>removeWishlistHandler(item.product)} style={{color:'red'}} className="fa fa-trash mt-2" aria-hidden="true"></i>
                   <Link to={`/product/${item.product}`}>
                   <Card.Img variant="top" src={item.image} />
