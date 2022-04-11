@@ -167,7 +167,7 @@ const CartScreen = () => {
           </Card>
         </Col>
       </Row>
-     
+     <main></main>
     </Container>
   );
 };

@@ -18,8 +18,23 @@ import {
   ORDER_SHIPPING_RESET,
 } from "../constants/orderConstants";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ORDER_CANCEL_RESET } from "../constants/orderConstants";
+import { ORDER_CANCEL_RESET, ORDER_PAY_SUCCESS} from "../constants/orderConstants";
 import Swal from "sweetalert2";
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+      const script = document.createElement('script')
+      script.src = src
+      script.onload = () => {
+          resolve(true)
+      }
+      script.onerror = () => {
+          resolve(false)
+      }
+      document.body.appendChild(script)
+  })
+}
+
 
 const OrderScreen = () => {
   const [sdkReady, setSdkReady] = useState(false);
@@ -55,6 +70,58 @@ const OrderScreen = () => {
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
+  
+
+
+
+
+ 
+
+
+async function showRazorpay() {
+  const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+  
+
+  if (!res) {
+      alert('Razorpay SDK failed to load. Are you online?')
+      return
+  }
+
+  const { data } = await axios.post(`/razorpay/${orderId}`)
+  
+
+  const options = {
+      key: 'rzp_test_XPEMuTOqO9MCEm',
+      currency: data.currency,
+      amount: data.amount.toString(),
+      order_id: data.id,
+      name: 'SportsCart',
+      description: 'Make the payment to complete the process',
+      image: '',
+
+      handler: async (response) => {
+        
+          await axios.post(`/razorpay/success/${orderId}`)
+          dispatch({ type: ORDER_PAY_SUCCESS })
+          // alert(response.razorpay_payment_id);
+          // alert(response.razorpay_order_id);
+          // alert(response.razorpay_signature);
+
+          alert('Transaction successful')
+      },
+      prefill: {
+          name: 'Abdul manaf',
+          email: 'afsal@gmail.com',
+          phone_number: '8136833754',
+      },
+  }
+  const paymentObject = new window.Razorpay(options)
+  console.log(paymentObject);
+  paymentObject.open()
+  // dispatch({
+  //   type: 'ORDER_DELIVER_SUCCESS',
+  // })
+}
 
   useEffect(() => {
     if (!userInfo) {
@@ -78,12 +145,12 @@ const OrderScreen = () => {
       successDeliver ||
       successShipped ||
       successCancel ||
-      order._id !== orderId 
+      order._id !== orderId
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch({ type: ORDER_CANCEL_RESET });
-     dispatch({type:ORDER_SHIPPING_RESET})
+      dispatch({ type: ORDER_SHIPPING_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -101,7 +168,6 @@ const OrderScreen = () => {
     navigate,
     successCancel,
     successShipped,
-    
   ]);
 
   const successPaymentHandler = (paymentResult) => {
@@ -174,9 +240,7 @@ const OrderScreen = () => {
               )}
 
               {order.isShipped ? (
-                <Message variant="success">
-                  Shipped {order.deliveredAt}
-                </Message>
+                <Message variant="success">Shipped {order.deliveredAt}</Message>
               ) : (
                 <Message variant="danger">Not Shipped</Message>
               )}
@@ -278,6 +342,18 @@ const OrderScreen = () => {
                   )}
                 </ListGroup.Item>
               )}
+              {!order.isPaid &&
+                !order.isCancelled &&
+                order.paymentMethod === "RazorPay" && (
+                  <ListGroup.Item>
+                    <Button
+                      onClick={showRazorpay}
+                      className="btn btn-block round"
+                    >
+                      Pay with RazorPay
+                    </Button>
+                  </ListGroup.Item>
+                )}
 
               {!order.isCancelled ? (
                 <ListGroup.Item>

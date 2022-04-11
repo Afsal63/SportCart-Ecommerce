@@ -83,6 +83,8 @@ const WishlistScreen = () => {
           </div>
         )}
       </Container>
+     
+<main></main>
     </div>
   );
 };

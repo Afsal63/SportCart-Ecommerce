@@ -60,6 +60,7 @@ const App = () => {
           <Route path='/' element={<HomeScreen />}></Route>
           <Route path='/search/:keyword' element={<HomeScreen />}></Route>
         </Routes>
+        
         <Footer/>
       </Router>
     </>

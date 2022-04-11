@@ -1,58 +1,57 @@
-import React, {}from 'react'
-import { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { listUsers, updateUser } from '../actions/userActions'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-import {useNavigate} from 'react-router-dom'
-import { Card } from 'react-bootstrap'
+import React from "react";
+import { useEffect } from "react";
+import { LinkContainer } from "react-router-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { listUsers, updateUser } from "../actions/userActions";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { useNavigate } from "react-router-dom";
+import { Card } from "react-bootstrap";
 
 const UserListScreen = () => {
-    const navigate=useNavigate()
-    const dispatch = useDispatch()
-    const userList = useSelector(state => state.userList)
-    const { loading, error, users } = userList
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userList = useSelector((state) => state.userList);
+  const { loading, error, users } = userList;
 
-    const userLogin = useSelector((state)=>state.userLogin)
-    const {userInfo}=userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-    const userUpdate = useSelector((state) => state.userUpdate)
-    const { success: successUpdate } = userUpdate
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { success: successUpdate } = userUpdate;
 
-    useEffect(() => {
-        if(userInfo && userInfo.isAdmin){
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      navigate("/login");
+    }
+  }, [dispatch, navigate, successUpdate, userInfo]);
 
-            dispatch(listUsers())
-        }else{
- navigate('/login')
-        }
-    }, [dispatch,navigate,successUpdate,userInfo])
+  const blockHandler = (user) => {
+    dispatch(updateUser({ ...user, isBlocked: true }));
 
-    
+    if (window.confirm("Do you want to block this user?")) {
+      dispatch(updateUser({ ...user, isBlocked: true }));
+    }
+  };
+  const unblockHandler = (user) => {
+    if (window.confirm("Unblock this user?")) {
+      dispatch(updateUser({ ...user, isBlocked: false }));
+    }
+  };
 
-    const blockHandler=(user) => {
-      if (window.confirm('Do you want to block this user?')) {
-          dispatch(updateUser({ ...user, isBlocked: true }))
-        }
-  }
-  const unblockHandler=(user) => {
-      if (window.confirm('Unblock this user?')) {
-          dispatch(updateUser({ ...user, isBlocked: false }))
-        }
-  }
-
-    return (
-        <>
-        <h1 className='ms-4'>Users</h1>
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-<Card className='p-5'>
-          <Table striped bordered hover responsive className='table-sm'>
+  return (
+    <>
+      <h1 className="ms-4">Users</h1>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Card className="p-5">
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
                 <th>ID</th>
@@ -72,29 +71,52 @@ const UserListScreen = () => {
                   </td>
                   <td>
                     {user.isAdmin ? (
-                      <i className='fas fa-check' style={{ color: 'green' }}></i>
+                      <i
+                        className="fas fa-check"
+                        style={{ color: "green" }}
+                      ></i>
                     ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                      <i className="fas fa-times" style={{ color: "red" }}></i>
                     )}
                   </td>
                   <td>
                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                      <Button variant='light' className='btn-sm'>
-                        <i className='fas fa-edit'></i>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-edit"></i>
                       </Button>
                     </LinkContainer>
-                    {user.isBlocked ?
-                              <Button variant ='danger' className='btn-sm' onClick={()=>unblockHandler(user)}>Unblock</Button>:
-                              <Button variant ='danger' className='btn-sm' onClick={()=>blockHandler(user)}>Block</Button>}
+                    {user.isBlocked ? (
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => unblockHandler(user)}
+                      >
+                        Unblock
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => blockHandler(user)}
+                      >
+                        Block
+                      </Button>
+                    )}
                   </td>
                 </tr>
               ))}
             </tbody>
           </Table>
-          </Card>
-        )}
-      </>
-    )
-}
+          {users.legth===0 ?(
 
-export default UserListScreen
+            <main></main>
+          ):null}
+          
+      
+        </Card>
+      )}
+    </>
+  );
+};
+
+export default UserListScreen;

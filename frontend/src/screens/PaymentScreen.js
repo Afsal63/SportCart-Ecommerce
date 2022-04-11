@@ -47,6 +47,7 @@ const PaymentScreen = () => {
                 </Button>
             </Form>
             </Card>
+            <main></main>
         </FormContainer>
     )
 }

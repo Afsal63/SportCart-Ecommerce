@@ -147,10 +147,15 @@ const PriductListScreen = () => {
                 ))}
               </tbody>
             </Table>
+
           </Card>
           <Paginate pages={pages} page={page} isAdmin={true} />
+          {products.length===0 ?(
+    <main></main>
+          ):null}
         </>
       )}
+      <div style={{height:'260px'}}></div>
     </>
   );
 };

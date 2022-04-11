@@ -15,7 +15,7 @@ const Footer = () => {
               This is the place for the premium badmintion racket you find here . we are serving the premium badmintion racket.
             </p>
            <div className="footer-copyright  py-3">
-          <div className='mx-auto' style={{width : '30%'}}>
+          <div className='mx-auto text-white' style={{width : '30%'}}>
           &copy; {new Date().getFullYear()}  <a className=' text-white text-decoration-none'> Copyright: SportsCart.com </a> <br/>
         <a  className='text-white text-decoration-none' target="_blank" href='https://afsal63.github.io/personalwebsite/' > Designed by Afsal</a>
           </div>
