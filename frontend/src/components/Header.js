@@ -9,18 +9,18 @@ import SearchBox from "./SearchBox";
 import { useEffect } from "react";
 
 const Header = () => {
-  const [hai,setHai]=useState(false)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
- const data=localStorage.getItem('userInfo')
- const data1=JSON.parse(data)
- 
-  useEffect(()=>{
-  setHai(true)
-  },[hai])
 
+  const userGoogleLogin=useSelector(state=>state.userGoogleLogin)
+  const {loading: googleLoading,error : googleError,userInfo: googleUserInfo}=userGoogleLogin
+//  const data=localStorage.getItem('userInfo')
+//  const data1=JSON.parse(data)
+ 
+ 
 
 
   const logoutHandler = () => {
@@ -51,8 +51,8 @@ const Header = () => {
                   <i className="fas fa-shopping-cart"></i> Cart
                 </Nav.Link>
               </LinkContainer>
-              {data ? (
-                <NavDropdown title={data1.name } id="username">
+              {userInfo ? (
+                <NavDropdown title={userInfo.name } id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

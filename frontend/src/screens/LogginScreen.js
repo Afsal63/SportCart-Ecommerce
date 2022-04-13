@@ -11,17 +11,19 @@ import axios from 'axios'
 import { googleLogin } from '../actions/userActions'
 
 const LogginScreen = () => {
+ 
 const [email,setEmail]=useState('')
 const[password,setPassword]=useState('')
 const dispatch = useDispatch()
 const navigate =useNavigate()
+
 const userLogin =useSelector(state=> state.userLogin)
 const {loading,error,userInfo} =userLogin
 
 
 const userGoogleLogin=useSelector(state=>state.userGoogleLogin)
 const {loading: googleLoading,error : googleError,userInfo: googleUserInfo}=userGoogleLogin
-console.log(googleUserInfo);
+// console.log(googleUserInfo);
 
  const [searchParams,setSearchParams]=useSearchParams('')
 const submitHandler= (e)=>{
@@ -32,7 +34,9 @@ dispatch(login(email,password))
 const redirect=searchParams.get('redirect') ||''
 
 useEffect(()=>{
+ 
   if(userInfo || googleUserInfo){
+    console.log(googleUserInfo);
     navigate(`/${redirect}`)
   }
 },[userInfo,redirect,googleUserInfo])
@@ -64,7 +68,7 @@ const responseSuccessGoogle=(response)=>{
   }
     
 
-const responseErrorGoogle=(response)=>{
+const responseErrorGoogle=(e)=>(response)=>{
  console.log(response);
 }
   return (

@@ -15,7 +15,7 @@ import axios from "axios";
 import ProductCarousel from "../components/ProductCarousel";
 import {USER_GOOGLE_LOGIN_SUCCESS} from '../constants/userConstants'
 const HomeScreen = ({id}) => {
-const [hai ,setHai]=useState(false)
+
 
  
 
@@ -30,12 +30,11 @@ const [hai ,setHai]=useState(false)
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    setHai(true)
-    dispatch({type:USER_GOOGLE_LOGIN_SUCCESS})
+  
     dispatch(listProducts(keyword, pageNumber));
     dispatch({ type: ORDER_CANCEL_RESET });
     dispatch({ type: ORDER_CREATE_RESET });
-  }, [dispatch, keyword, pageNumber,hai]);
+  }, [dispatch, keyword, pageNumber,]);
 
 
   return (
@@ -92,6 +91,7 @@ const [hai ,setHai]=useState(false)
                     {" "}
                     GO BACK{" "}
                   </Link>
+                  <main></main>
                 </div>
               )}
             </>

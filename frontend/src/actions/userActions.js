@@ -27,6 +27,7 @@ import {
   USER_GOOGLE_LOGIN_REQUEST,
   USER_GOOGLE_LOGIN_SUCCESS,
   USER_GOOGLE_LOGIN_FAIL,
+  USER_GOOGLE_LOGOUT,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 
@@ -56,6 +57,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_GOOGLE_LOGOUT });
   dispatch({ type: USER_DETAIS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: USER_LIST_RESET });
@@ -239,8 +241,9 @@ export const googleLogin = (tokenId) => async (dispatch) => {
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post("/api/googlelogin", { tokenId }, config);
 
-    // console.log(data)
+    console.log(data);
     dispatch({ type: USER_GOOGLE_LOGIN_SUCCESS, payload: data });
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
@@ -252,3 +255,5 @@ export const googleLogin = (tokenId) => async (dispatch) => {
     });
   }
 };
+
+
