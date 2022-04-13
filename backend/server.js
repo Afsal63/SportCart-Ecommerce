@@ -10,6 +10,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import offerRoutes from './routes/offerRoutes.js'
 import coopenRoutes from './routes/coopenRoutes.js'
+import googleLoginRoutes from './routes/googleLoginRoutes.js'
 import morgan from 'morgan'
 import Razorpay from 'razorpay'
 import Order from './models/orderModel.js'
@@ -31,6 +32,7 @@ app.use('/api/orders',orderRoutes)
 app.use('/api/upload',uploadRoutes)
 app.use('/api/offers',offerRoutes)
 app.use('/api/coopens',coopenRoutes)
+app.use('/api/googlelogin',googleLoginRoutes)
 app.get('/api/config/paypal',(req,res)=>res.send(process.env.PAYPAL_CLIENT_ID))
 
 const __dirname =path.resolve()

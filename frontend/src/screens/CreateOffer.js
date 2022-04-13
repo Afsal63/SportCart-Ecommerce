@@ -16,7 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { addCoopen, addOffer, deleteOffer, listOffers } from "../actions/offerAction";
+import { addCoopen, addOffer, deleteOffer, listCoopens, listOffers } from "../actions/offerAction";
 import { Card } from "react-bootstrap";
 import { OFFER_ADD_RESET } from "../constants/offerConstants";
 
@@ -83,6 +83,7 @@ const CreateOffer = () => {
 
   useEffect(() => {
     dispatch(listOffers());
+    dispatch(listCoopens())
   }, [navigate, dispatch, success, successDelete, offerDelete]);
 
   return (

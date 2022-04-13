@@ -20,6 +20,7 @@ import {
   userListReducer,
   userDeleteReducer,
   userUpdateReducer,
+  userGoogleLoginReducer
 } from "./reducers/userReducers";
 
 import {
@@ -51,6 +52,7 @@ const reducer = combineReducers({
   wishlist:wishlistReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userGoogleLogin:userGoogleLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
@@ -68,6 +70,7 @@ const reducer = combineReducers({
   offerList: offerListReducer,
   addNewOffer: addNewOfferReducer,
   offerDelete: offerDeleteReducer,
+
 
 });
 

@@ -6,7 +6,9 @@ import Message from '../components/Message'
 import Loader from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import {login} from '../actions/userActions'
-
+import GoogleLogin from 'react-google-login';
+import axios from 'axios'
+import { googleLogin } from '../actions/userActions'
 
 const LogginScreen = () => {
 const [email,setEmail]=useState('')
@@ -15,6 +17,11 @@ const dispatch = useDispatch()
 const navigate =useNavigate()
 const userLogin =useSelector(state=> state.userLogin)
 const {loading,error,userInfo} =userLogin
+
+const userGoogleLogin=useSelector(state=>state.userGoogleLogin)
+const {loading: googleLoading,error : googleError,userInfo: googleUserInfo}=userGoogleLogin
+
+
  const [searchParams,setSearchParams]=useSearchParams('')
 const submitHandler= (e)=>{
  e.preventDefault()
@@ -24,10 +31,41 @@ dispatch(login(email,password))
 const redirect=searchParams.get('redirect') ||''
 
 useEffect(()=>{
-  if(userInfo){
+  if(userInfo || googleUserInfo){
     navigate(`/${redirect}`)
   }
-},[userInfo,redirect,])
+},[userInfo,redirect,googleUserInfo])
+
+
+const responseSuccessGoogle=(response)=>{
+
+  
+
+ const tokenId=response.tokenId
+  
+
+  dispatch(googleLogin(tokenId))
+  
+
+  
+     
+    
+  //   axios({
+  //     method:'POST',
+  //     url :'/api/googlelogin',
+  //     data:{tokenId:response.tokenId}
+  //   }).then(response=>{
+  // console.log("google login succuss",response);
+  // navigate(`/${redirect}`)
+  //   }
+  //   )
+
+  }
+    
+
+const responseErrorGoogle=(response)=>{
+ console.log(response);
+}
   return (
     <FormContainer>
      
@@ -47,7 +85,15 @@ useEffect(()=>{
         <Button className='mt-3' type='submit' variant='dark'>
           Sign In
         </Button>
+
       </Form>
+        <GoogleLogin className='ms-3 mt-3'
+    clientId="298138034880-2399j4kl1vjkdh7aebp4u6388ca9gccs.apps.googleusercontent.com"
+    buttonText="Login with Google"
+    onSuccess={responseSuccessGoogle}
+    onFailure={responseErrorGoogle}
+    cookiePolicy={'single_host_origin'}
+  />
       </Card>
       <Row className='py-3'>
         <Col className='d-flex'>

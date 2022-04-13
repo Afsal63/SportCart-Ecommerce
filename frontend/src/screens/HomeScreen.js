@@ -13,7 +13,12 @@ import { Slider } from "@material-ui/core";
 import { useState } from "react";
 import axios from "axios";
 import ProductCarousel from "../components/ProductCarousel";
+import {USER_GOOGLE_LOGIN_SUCCESS} from '../constants/userConstants'
 const HomeScreen = ({id}) => {
+
+  const userGoogleLogin=useSelector(state=>state.userGoogleLogin)
+const {loading: googleLoading,error : googleError,userInfo: googleUserInfo}=userGoogleLogin
+
   const params = useParams();
   const keyword = params.keyword;
   const [newPrice, setNewPrice] = useState(0, 500);
@@ -25,10 +30,11 @@ const HomeScreen = ({id}) => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
+    dispatch({type:USER_GOOGLE_LOGIN_SUCCESS})
     dispatch(listProducts(keyword, pageNumber));
     dispatch({ type: ORDER_CANCEL_RESET });
     dispatch({ type: ORDER_CREATE_RESET });
-  }, [dispatch, keyword, pageNumber]);
+  }, [dispatch, keyword, pageNumber,googleUserInfo]);
 
 
   return (

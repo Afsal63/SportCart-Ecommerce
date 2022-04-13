@@ -1,7 +1,9 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/userModel.js"
 import generateToken from "../utils/generatedToken.js"
-
+import { OAuth2Client } from "google-auth-library"
+import { response } from "express"
+const client =new OAuth2Client(process.env.GOOGEL_CLIENT_ID)
 //@dec Auth user & get token
 //@route POST /api/users/login
 //@acces Public  
@@ -192,6 +194,58 @@ const getUsersReport = asyncHandler(async (req, res) => {
   res.json({usersCount:usersNum,blockedUsersCount:blockedUsersNum})
 })
 
+const googleLogin =asyncHandler(async(req,res)=>{
+ 
+   const {tokenId}=req.body
+   const ticket = await client.verifyIdToken({
+    idToken: tokenId,
+    audience: process.env.GOOGEL_CLIENT_ID
+});
+const { email_verified, name, email} = ticket.getPayload();
+
+ if(email_verified){
+ User.findOne({email}).exec((err,user)=>{
+     if (err){
+       return res.status(400).json({
+         error:'something went wrong'
+       })
+     }else{
+       if(user){
+        res.json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user._id),
+        })
+
+       }else{
+         let password = email + process.env.JWT_SECRET
+        let newUser = new User({name,email,password})
+        newUser.save((err,data)=>{
+          if (err){
+            return res.status(400).json({
+              error:'something went wrong'
+            })
+          }
+          res.json({
+            _id: data._id,
+            name: data.name,
+            email: data.email,
+            isAdmin: data.isAdmin,
+            token: generateToken(newUser._id),
+          })
+        })
+       }
+     }
+ })
+  
+
+ }
+})
+
+
+// })
 
 
 export { authUser,
@@ -202,4 +256,5 @@ export { authUser,
    deleteUser,
   getUserById,
 updateUser,
-getUsersReport } 
+getUsersReport,
+googleLogin } 
