@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../index.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,23 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { logout } from "../actions/userActions";
 import SearchBox from "./SearchBox";
+import { useEffect } from "react";
 
 const Header = () => {
+  const [hai,setHai]=useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+ const data=localStorage.getItem('userInfo')
+ const data1=JSON.parse(data)
+ 
+  useEffect(()=>{
+  setHai(true)
+  },[hai])
+
+
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -40,8 +51,8 @@ const Header = () => {
                   <i className="fas fa-shopping-cart"></i> Cart
                 </Nav.Link>
               </LinkContainer>
-              {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+              {data ? (
+                <NavDropdown title={data1.name } id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

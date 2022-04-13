@@ -18,9 +18,10 @@ const navigate =useNavigate()
 const userLogin =useSelector(state=> state.userLogin)
 const {loading,error,userInfo} =userLogin
 
+
 const userGoogleLogin=useSelector(state=>state.userGoogleLogin)
 const {loading: googleLoading,error : googleError,userInfo: googleUserInfo}=userGoogleLogin
-
+console.log(googleUserInfo);
 
  const [searchParams,setSearchParams]=useSearchParams('')
 const submitHandler= (e)=>{
