@@ -38,7 +38,7 @@ import {
   addNewOfferReducer,
   offerDeleteReducer,
   offerListReducer,
-
+ coopenListReducer
 } from "./reducers/offerReducer";
 
 const reducer = combineReducers({
@@ -68,6 +68,7 @@ const reducer = combineReducers({
   orderMyList: orderListMyReducer,
   orderCancel: orderCancelReducers,
   offerList: offerListReducer,
+ coopenList:coopenListReducer,
   addNewOffer: addNewOfferReducer,
   offerDelete: offerDeleteReducer,
 

@@ -36,7 +36,7 @@ const redirect=searchParams.get('redirect') ||''
 useEffect(()=>{
  
   if(userInfo || googleUserInfo){
-    console.log(googleUserInfo);
+   
     navigate(`/${redirect}`)
   }
 },[userInfo,redirect,googleUserInfo])

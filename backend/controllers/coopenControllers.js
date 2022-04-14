@@ -3,7 +3,7 @@ import Coopen from "../models/coopenModel.js";
 import Product from '../models/productModel.js'
 
 const addNewCoopen = asyncHandler(async(req,res) => {
-   console.log('fksjdfjsjdkfjlkasjdflks=========');
+   
     const {coopenName, coopenDiscount, category }=req.body
     const existingCoopen=await Coopen.findOne({coopenName:coopenName})
     if(existingCoopen) {
@@ -11,16 +11,13 @@ const addNewCoopen = asyncHandler(async(req,res) => {
         throw new Error('Coopen is already exists')
     }else{
     const coopen= await Coopen.create({
-        coopenName, coopenDiscount, category 
+        coopenName, coopenDiscount, 
        
     })
     res.json(coopen)
 
-    const products=await Product.find({})
-    products.forEach(async(product)=>{
-        product.coopenPrice=coopen.coopenDiscount
-        await product.save()
-    })
+   
+
     if(coopen){
         res.json(coopen)
    }

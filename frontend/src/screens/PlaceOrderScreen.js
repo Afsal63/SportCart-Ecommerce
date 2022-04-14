@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -8,13 +8,24 @@ import { Link } from "react-router-dom";
 import { createOrder } from "../actions/orderActions";
 import { useNavigate } from "react-router-dom";
 import { ORDER_CANCEL_RESET } from "../constants/orderConstants";
+import { listCoopens } from "../actions/offerAction";
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
+
+  const coopenList=useSelector((state)=>state.coopenList)
+  const {coopensList}=coopenList
+ console.log(coopensList);
+
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+ const [coopen,setCoopen]=useState('')
 
-  // ₹
+  const applayCoopen=()=>{
+    console.log(coopen);
+    // setCoopen('')
+  }
+  
 
   //Calculate Prices
   const addDecimals = (num) => {
@@ -46,12 +57,13 @@ const PlaceOrderScreen = () => {
 
   useEffect(() => {
     
+  dispatch(listCoopens())
     if (success) {
       navigate(`/order/${order._id}`);
      
     }
 
-  }, [navigate, success]);
+  }, [navigate, success,]);
   const PlaceOrderHandler = () => {
     dispatch(
       createOrder({
@@ -171,7 +183,23 @@ const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
+              <Row>
+                </Row>
+                <h4 className="ms-3">Available coopens</h4>
+                  {coopensList.map((coopen)=>(
+                    
+                <Row>
+                
+                <Col className="m-auto">{coopen.coopenName}</Col>
+                <Col >{coopen. coopenDiscount}%</Col>
+                <Col className="m">{coopen. coopenDiscount}%</Col>
+              </Row>
+                  ))}
+                  
               <ListGroup.Item>
+                <ListGroup.Item>
+
+                </ListGroup.Item>
                 <Button
                   type="button"
                   className="btn-block"

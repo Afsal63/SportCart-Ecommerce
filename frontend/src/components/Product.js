@@ -41,7 +41,7 @@ const dispatch =useDispatch()
                    <Rating value={product.rating} text={`${product.numReview} reviews`}/>
                 </Card.Text>
               <Card.Text as='h5'>
-                {product.discountPrice > 0 ? <strike>(${product.price})</strike>:null}
+                {product.discountPrice > 0 ? <strike>(₹{product.price})</strike>:null}
                 </Card.Text>
               <Card.Text as='h4'>
                 {product.discountPrice > 0 

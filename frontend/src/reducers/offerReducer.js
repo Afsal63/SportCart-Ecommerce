@@ -11,6 +11,10 @@ import {
   OFFER_DELETE_FAIL,
   OFFER_DELETE_RESET,
   OFFER_ADD_RESET,
+  COOPENS_LIST_REQUEST,
+  COOPENS_LIST_SUCCESS,
+  COOPENS_LIST_FAIL,
+  COOPENS_LIST_RESET,
 } from "../constants/offerConstants";
 
 export const offerListReducer = (state = { offerslist: [] }, action) => {
@@ -54,6 +58,23 @@ export const offerDeleteReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case OFFER_DELETE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const coopenListReducer = (state = { coopensList: [] }, action) => {
+  switch (action.type) {
+    case COOPENS_LIST_REQUEST:
+      return { ...state, loading: true };
+    case COOPENS_LIST_SUCCESS:
+      return { loading: false, coopensList: action.payload };
+    case COOPENS_LIST_FAIL:
+      return { loading: false, error: action.payload.data };
+    case COOPENS_LIST_RESET:
+      return {
+        offerslist: [],
+      };
     default:
       return state;
   }

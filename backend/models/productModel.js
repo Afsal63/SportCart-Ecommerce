@@ -66,11 +66,7 @@ const productSchema = mongoose.Schema({
         default:0
     },
 
-    coopenPrice:{
-  type:Number,
-  required:true,
-  default:0
-    },
+   
 
     countInStock: {
         type: Number,
