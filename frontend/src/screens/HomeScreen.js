@@ -21,7 +21,7 @@ const HomeScreen = ({id}) => {
 
   const params = useParams();
   const keyword = params.keyword;
-  const [newPrice, setNewPrice] = useState(0, 500);
+ 
   const pageNumber = params.pageNumber || 1;
 
   const dispatch = useDispatch();

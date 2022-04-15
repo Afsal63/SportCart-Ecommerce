@@ -97,6 +97,9 @@ body{
   margin: 0%;
 
 }
+.coopen1{
+  border-radius: 10%;
+}
 .crop-img-container-wrapper {
   width: 100vw;
   min-height: 100vh;

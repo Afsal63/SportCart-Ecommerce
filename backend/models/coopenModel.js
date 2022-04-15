@@ -6,7 +6,7 @@ const coopenSchema=mongoose.Schema(
             required:true,
        },
        coopenDiscount:{
-           type:String,
+           type:Number,
            required:true,
        },
        category:{
@@ -14,6 +14,11 @@ const coopenSchema=mongoose.Schema(
         // required:true,
         default:'Badmintion'
   
+       },
+       isApplyed:{
+           type:Boolean,
+           default:false,
+           required:true
        }
     },{
         timestamps: true

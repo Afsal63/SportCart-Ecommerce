@@ -11,6 +11,7 @@ import { listMyOrders } from '../actions/orderActions'
 import { Card } from 'react-bootstrap'
 
 const ProfileScreen = () => {
+ 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -39,6 +40,7 @@ const ProfileScreen = () => {
 
   useEffect(() => {
    
+  
     if (!userInfo) {
       navigate('/login')
     } else {
@@ -51,7 +53,7 @@ const ProfileScreen = () => {
      
       }
     }
-  }, [dispatch, navigate, userInfo,user])
+  }, [dispatch, navigate, userInfo,user,])
 
 
     const submitHandler = (e) => {

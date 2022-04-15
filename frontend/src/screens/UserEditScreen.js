@@ -49,7 +49,7 @@ const UserEditScreen = () => {
     }
     return (
         <>
-            <Link to='/admin/userlist' className='btn btn-light my-3'>
+            <Link to='/admin/userlist' className='btn ms-3 btn-dark my-3'>
                 Go Back
             </Link>
             <FormContainer>
@@ -97,6 +97,7 @@ const UserEditScreen = () => {
                     </Form>
                 )}
             </FormContainer>
+            <main></main>
         </>
     )
 }

@@ -54,6 +54,12 @@ const orderSchema =mongoose.Schema({
         default:0.0
         
     },
+    coopenDiscount:{
+     type:Number,
+     required:true,
+     default:0.0
+    },
+
     isPaid: {
         type:Boolean,
         required:true,

@@ -58,6 +58,8 @@ const getOfferDetails = asyncHandler(async(req,res) => {
     }
  }) 
 
+  
 
 
-export {addNewOffer,getOffers,deleteOffer,getOfferDetails}
+
+export {addNewOffer,getOffers,deleteOffer,getOfferDetails,}

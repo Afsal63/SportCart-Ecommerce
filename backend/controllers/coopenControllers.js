@@ -57,6 +57,20 @@ const getCoopenDetails = asyncHandler(async(req,res) => {
     }
  }) 
 
+ const applyCoopen = asyncHandler(async(req,res) => {
+     
+     
+    const coopenApply=await Coopen.findById(req.params.id)
+    if(coopenApply){
+        coopenApply.isApplyed = true
+        coopenApply.save()
+        res.json(coopenApply)
+    }else{
+        res.status(404)
+        throw new Error('coopen not found')
+    }
+ })
 
 
-export {addNewCoopen,getCoopens,deleteCoopens,getCoopenDetails}
+
+export {addNewCoopen,getCoopens,deleteCoopens,getCoopenDetails,applyCoopen}

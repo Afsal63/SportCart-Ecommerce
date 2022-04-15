@@ -15,6 +15,9 @@ import {
   COOPENS_LIST_SUCCESS,
   COOPENS_LIST_FAIL,
   COOPENS_LIST_RESET,
+  COOPENS_APPLY_REQUEST,
+  COOPENS_APPLY_SUCCESS,
+  COOPENS_APPLY_FAIL,
 } from "../constants/offerConstants";
 
 export const offerListReducer = (state = { offerslist: [] }, action) => {
@@ -42,7 +45,7 @@ export const addNewOfferReducer = (state = {}, action) => {
       return { loading: false, success: true };
     case OFFER_ADD_FAIL:
       return { loading: false, error: action.payload };
-      
+
     default:
       return state;
   }
@@ -75,6 +78,20 @@ export const coopenListReducer = (state = { coopensList: [] }, action) => {
       return {
         offerslist: [],
       };
+    default:
+      return state;
+  }
+};
+
+export const applyCoopenReducer = (state = { coopenAppleys: [] }, action) => {
+  switch (action.type) {
+    case COOPENS_APPLY_REQUEST:
+      return { ...state, loading: true };
+    case COOPENS_APPLY_SUCCESS:
+      return { loading: false, coopenAppleys: action.payload };
+    case COOPENS_APPLY_FAIL:
+      return { loading: false, error: action.payload.data };
+
     default:
       return state;
   }

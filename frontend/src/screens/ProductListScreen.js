@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import Swal from "sweetalert2";
 import { Card } from "react-bootstrap";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 const PriductListScreen = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const PriductListScreen = () => {
 
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({type:PRODUCT_UPDATE_RESET})
     if (!userInfo.isAdmin) {
       navigate("/login");
     }
