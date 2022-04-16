@@ -18,6 +18,14 @@ import {
   COOPENS_APPLY_REQUEST,
   COOPENS_APPLY_SUCCESS,
   COOPENS_APPLY_FAIL,
+  COOPENS_APPLY_RESET,
+  COOPENS_DELETE_REQUEST,
+  COOPENS_DELETE_SUCCESS,
+  COOPENS_DELETE_FAIL,
+  COOPENS_DELETE_RESET,
+  COOPEN_ADD_REQUEST,
+  COOPEN_ADD_SUCCESS,
+  COOPEN_ADD_FAIL,
 } from "../constants/offerConstants";
 
 export const offerListReducer = (state = { offerslist: [] }, action) => {
@@ -51,6 +59,20 @@ export const addNewOfferReducer = (state = {}, action) => {
   }
 };
 
+export const addNewCouponReducer = (state = {}, action) => {
+  switch (action.type) {
+    case COOPEN_ADD_REQUEST:
+      return { loading: true };
+    case COOPEN_ADD_SUCCESS:
+      return { loading: false, success: true };
+    case COOPEN_ADD_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
 export const offerDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case OFFER_DELETE_REQUEST:
@@ -72,6 +94,7 @@ export const coopenListReducer = (state = { coopensList: [] }, action) => {
       return { ...state, loading: true };
     case COOPENS_LIST_SUCCESS:
       return { loading: false, coopensList: action.payload };
+      
     case COOPENS_LIST_FAIL:
       return { loading: false, error: action.payload.data };
     case COOPENS_LIST_RESET:
@@ -91,7 +114,23 @@ export const applyCoopenReducer = (state = { coopenAppleys: [] }, action) => {
       return { loading: false, coopenAppleys: action.payload };
     case COOPENS_APPLY_FAIL:
       return { loading: false, error: action.payload.data };
+   case COOPENS_APPLY_RESET:
+     return{coopenAppleys:[]}
+    default:
+      return state;
+  }
+};
 
+export const couponDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case COOPENS_DELETE_REQUEST:
+      return { loading: true, success: false };
+    case COOPENS_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case COOPENS_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+    case COOPENS_DELETE_RESET:
+      return {};
     default:
       return state;
   }

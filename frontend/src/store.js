@@ -39,7 +39,9 @@ import {
   offerDeleteReducer,
   offerListReducer,
  coopenListReducer,
- applyCoopenReducer
+ applyCoopenReducer,
+ couponDeleteReducer,
+ addNewCouponReducer,
 } from "./reducers/offerReducer";
 
 const reducer = combineReducers({
@@ -70,8 +72,10 @@ const reducer = combineReducers({
   orderCancel: orderCancelReducers,
   offerList: offerListReducer,
  coopenList:coopenListReducer,
+ couponDelete:couponDeleteReducer,
  applyCoopen:applyCoopenReducer,
   addNewOffer: addNewOfferReducer,
+ addNewCoupon:addNewCouponReducer,
   offerDelete: offerDeleteReducer,
 
 

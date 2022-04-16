@@ -34,11 +34,7 @@ const getCoopens = asyncHandler(async(req,res) => {
 const deleteCoopens = asyncHandler(async(req,res) => {
     const coopen=await Coopen.findById(req.params.id)
     if(coopen){
-        const products=await Product.find({})
-        products.forEach(async(product)=>{
-        product.coopenPrice=product.coopenPrice-coopen.coopenDiscount
-        await product.save()
-    })
+        
         await coopen.remove()
         res.json({message:'Coopen Removed'})
     }else{

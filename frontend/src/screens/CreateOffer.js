@@ -16,7 +16,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { addCoopen, addOffer, deleteOffer, listCoopens, listOffers } from "../actions/offerAction";
+import {
+  addCoopen,
+  addOffer,
+  deleteOffer,
+  listCoopens,
+  listOffers,
+  deleteCoupon,
+} from "../actions/offerAction";
 import { Card } from "react-bootstrap";
 import { OFFER_ADD_RESET } from "../constants/offerConstants";
 
@@ -51,12 +58,25 @@ const CreateOffer = () => {
   const addNewOffer = useSelector((state) => state.addNewOffer);
   const { success } = addNewOffer;
 
+  const coopenList = useSelector((state) => state.coopenList);
+  const { coopensList } = coopenList;
+
+  const addNewCoupon = useSelector((state)=> state.addNewCoupon)
+  const{success:couponAddSuccess}=addNewCoupon
+
   const offerDelete = useSelector((state) => state.offerDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
   } = offerDelete;
+
+  const couponDelete = useSelector((state) => state.couponDelete);
+  const {
+    loading: loadingCouponDelete,
+    error: errorCouponDelete,
+    success: successCouponDelete,
+  } = couponDelete;
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -75,7 +95,9 @@ const CreateOffer = () => {
     setCoopenDiscount(0);
     setCategory("");
   };
-
+  const deleteCouponHandler = async (couponId) => {
+    dispatch(deleteCoupon(couponId));
+  };
   const deleteHandler = async (offerId) => {
     dispatch(deleteOffer(offerId));
     navigate("/admin/offers");
@@ -83,8 +105,18 @@ const CreateOffer = () => {
 
   useEffect(() => {
     dispatch(listOffers());
-    dispatch(listCoopens())
-  }, [navigate, dispatch, success, successDelete, offerDelete]);
+    dispatch(listCoopens());
+    
+    
+  }, [
+    navigate,
+    dispatch,
+    success,
+    couponAddSuccess,
+    successDelete,
+    offerDelete,
+    successCouponDelete,
+  ]);
 
   return (
     <>
@@ -103,12 +135,12 @@ const CreateOffer = () => {
                 <Card className="p-5">
                   <Nav.Item>
                     <Nav.Link eventKey="first" className="font-weight-bold">
-                      Offers
+                      Offers && Coupon
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link eventKey="second" className="font-weight-bold">
-                      Add new offer
+                      Add new offer or coopen
                     </Nav.Link>
                   </Nav.Item>
                 </Card>
@@ -163,6 +195,55 @@ const CreateOffer = () => {
                     </Col>
                   </Row>
                 </Tab.Pane>
+
+                <Tab.Pane eventKey="first">
+                  <Row>
+                    <Col md={9} className="m-auto mt-5">
+                      <h1>Coupons</h1>
+
+                      {/* {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : ( */}
+                      <Card>
+                        <Table
+                          striped
+                          bordered
+                          hover
+                          responsive
+                          className="table-sm tableColor p-5"
+                        >
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Coupons</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {coopensList.map((y) => (
+                              <tr>
+                                <td>{y.coopenName}</td>
+                                <td>{y.coopenDiscount}</td>
+                                <td>
+                                  <Button
+                                    size="sm"
+                                    className="sm"
+                                    onClick={() => deleteCouponHandler(y._id)}
+                                  >
+                                    <i
+                                      className="fas fa-times"
+                                      style={{ color: "red" }}
+                                    ></i>
+                                    Delete
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </Card>
+                    </Col>
+                  </Row>
+                </Tab.Pane>
+
                 <Tab.Pane eventKey="second">
                   <Row>
                     <Col md={9} className="m-auto">
@@ -228,8 +309,6 @@ const CreateOffer = () => {
                               }
                             ></Form.Control>
                           </Form.Group>
-
-                         
 
                           <Row className="pt-2 ml-auto text-center">
                             <Button

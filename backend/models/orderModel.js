@@ -54,7 +54,7 @@ const orderSchema =mongoose.Schema({
         default:0.0
         
     },
-    coopenDiscount:{
+    couponPrice:{
      type:Number,
      required:true,
      default:0.0

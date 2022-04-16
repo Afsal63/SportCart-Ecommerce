@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { ORDER_CANCEL_RESET } from "../constants/orderConstants";
 import { listCoopens, coopenApplay } from "../actions/offerAction";
 
+import { COOPENS_APPLY_RESET } from "../constants/offerConstants";
+
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
 
@@ -27,11 +29,8 @@ const PlaceOrderScreen = () => {
     dispatch(coopenApplay(id));
   };
 
-  useEffect(() => {
-    //  if (!coopenAppleys.isApplyed) {
-    //    dispatch(coopenApplay())
-    //  }
-  }, [dispatch]);
+
+
 
   //Calculate Prices
   const addDecimals = (num) => {
@@ -78,9 +77,11 @@ const PlaceOrderScreen = () => {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
+        couponPrice: coopenAppleys.coopenDiscount,
         totalPrice: cart.totalPrice,
       })
     );
+    dispatch({type:COOPENS_APPLY_RESET})
   };
   return (
     <>
@@ -181,7 +182,7 @@ const PlaceOrderScreen = () => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Coupon discount</Col>
-                      <Col>₹ {coopenAppleys.coopenDiscount}</Col>
+                      <Col>  ₹ {coopenAppleys.coopenDiscount}</Col>
                     </Row>
                   </ListGroup.Item>
                 </>
@@ -204,7 +205,7 @@ const PlaceOrderScreen = () => {
                     <Row>
                       <Col className="m-auto">{coopen.coopenName}</Col>
 
-                      <Col className="m-auto">{coopen.coopenDiscount}</Col>
+                      <Col className="m-auto">FLAT - ₹ {coopen.coopenDiscount}</Col>
                       <Col
                         onClick={(e) => coopenHandler(coopen._id)}
                         style={{ color: "green" }}
@@ -217,7 +218,10 @@ const PlaceOrderScreen = () => {
                   ))}
                 </>
               ) : (
-                <Message> Coopen applied success fully</Message>
+                <> 
+                <Message > Coopen applied success fully </Message>
+               
+                </>
               )}
 
               <ListGroup.Item>

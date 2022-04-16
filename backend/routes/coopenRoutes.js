@@ -4,7 +4,7 @@ const router=express.Router()
 import { getCoopens,addNewCoopen,deleteCoopens,getCoopenDetails,applyCoopen } from "../controllers/coopenControllers.js";
 
 router.route('/').post(addNewCoopen).get(getCoopens)
-router.route('/:id').delete(deleteCoopens).get(protect,getCoopenDetails)
+router.route('/:id').delete(protect,deleteCoopens).get(protect,getCoopenDetails)
 router.route('/:id/apply').get(protect,applyCoopen)
 
 
