@@ -51,6 +51,7 @@ const WishlistScreen = () => {
 
   return (
     <div>
+      <h2 className="ms-5">Wishlist</h2>
       <Container>
         {wishlistItem.length === 0 ? (
           <Message>
