@@ -21,6 +21,6 @@ router.route('/:id/deliver').put(protect,admin,updateOrderToDelivered)
 router.route('/:id/shipping').put(protect,admin,updateOrderToShipped)
 router.route('/report/orders').get(getOrderReports)
 router.route('/:id/cancel').put(protect,cancelledOrder)
-router.route('/salesreport').get(report)
-router.route('/salesreport/:id').get(report)
+router.route('/salesreport').get(protect,admin,report)
+router.route('/salesreport/:id').get(protect,admin,report)
 export default router

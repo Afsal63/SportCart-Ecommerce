@@ -13,7 +13,7 @@ import User from "../models/userModel.js";
 router.get('/top', getTopProducts)
 router.route('/').get(getProduts).post(protect,admin,createProduct)
 router.route('/:id').get(getProductById).delete(protect,admin,deleteProduct).put(protect,admin,updateProduct)
-router.route('/report/products').get(getProductsReport)
+router.route('/report/products').get(protect,admin,getProductsReport)
 router.route('/:id/reviews').post(protect,createProductReview)
 
 

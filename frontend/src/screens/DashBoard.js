@@ -32,15 +32,24 @@ const DashBoard = () => {
 
     useEffect(() => {
         const getUnitsSold = async () => {
-            const { data } = await axios.get('/api/products/report/products')
+            const data1=localStorage.getItem('userInfo')
+ const userInfo=JSON.parse(data1)
+            const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+            const { data } = await axios.get('/api/products/report/products',config)
             setData(data)
         }
         const getOrderData = async () => {
-            const { data } = await axios.get('/api/orders/report/orders')
+            const data1=localStorage.getItem('userInfo')
+            const userInfo=JSON.parse(data1)
+            const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+            const { data } = await axios.get('/api/orders/report/orders',config)
             setOrderData(data)
         }
         const getUserData = async () => {
-            const { data } = await axios.get('/api/users/report/users')
+            const data1=localStorage.getItem('userInfo')
+            const userInfo=JSON.parse(data1)
+            const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+            const { data } = await axios.get('/api/users/report/users',config)
             setUserData(data)
         }
         getUnitsSold()
@@ -197,6 +206,7 @@ const DashBoard = () => {
                                             </Card.Body>
                                         </Card>
                                     </Col>
+                                                    <main></main>
                                 </Row>
                                 
                             </Tab.Pane>
@@ -230,6 +240,7 @@ const DashBoard = () => {
                         </Tab.Content>
                         </Container>
                     </Col>
+                    <main></main>
                 </Row>
             </Tab.Container>
         </>

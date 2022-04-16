@@ -18,5 +18,5 @@ router.route('/').post(registerUser).get(protect,admin,getUsers,)
 router.post('/login', authUser,)
 router.route('/profile').get(protect,getUserProfile).put(protect,updateUserProfile)
 router.route('/:id').delete(protect,admin,deleteUser).get(protect,admin,getUserById).put(updateUser)
-router.route('/report/users').get(getUsersReport)
+router.route('/report/users').get(protect,admin,getUsersReport)
 export default router

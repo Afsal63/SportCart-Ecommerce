@@ -99,8 +99,12 @@ const SalesReportScreen = () => {
   }
 
   const fetchData = async () => {
+    
+      const data1=localStorage.getItem('userInfo')
+const userInfo=JSON.parse(data1)
+      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
     const { data } = await axios.get(
-      `/api/orders/salesreport/${upper}?lower=${lower}`
+      `/api/orders/salesreport/${upper}?lower=${lower}`,config
     )
     setProducts(data.products)
   }
