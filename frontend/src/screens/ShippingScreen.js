@@ -5,6 +5,7 @@ import FormContainer from '../components/FormContainer'
 import Checkout from '../components/Checkout'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { saveShippingAddress } from '../actions/cartAction'
 
 
@@ -25,6 +26,10 @@ const ShippingScreen = () => {
       dispatch(saveShippingAddress({address,city,postalCode,country}))
       navigate('/payment')
     }
+ useEffect(()=>{
+    
+ },[address,city,postalCode,country])
+
 
   return (
       <FormContainer>

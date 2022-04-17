@@ -240,6 +240,7 @@ export const googleLogin = (tokenId) => async (dispatch) => {
     dispatch({ type: USER_GOOGLE_LOGIN_REQUEST });
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post("/api/googlelogin", { tokenId }, config);
+    console.log(data);
 
     console.log(data);
     dispatch({ type: USER_GOOGLE_LOGIN_SUCCESS, payload: data });

@@ -44,6 +44,7 @@ useEffect(()=>{
 
 const responseSuccessGoogle=(response)=>{
 
+  console.log(response);
   
 
  const tokenId=response.tokenId
@@ -93,7 +94,8 @@ const responseErrorGoogle=(e)=>(response)=>{
 
       </Form>
         <GoogleLogin className='ms-3 mt-3'
-    clientId="298138034880-2399j4kl1vjkdh7aebp4u6388ca9gccs.apps.googleusercontent.com"
+        
+    clientId="298138034880-tpv5i4hvkth26couptb9mio2h9i3tppg.apps.googleusercontent.com"
     buttonText="Login with Google"
     onSuccess={responseSuccessGoogle}
     onFailure={responseErrorGoogle}

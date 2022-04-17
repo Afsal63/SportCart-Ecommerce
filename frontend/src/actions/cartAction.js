@@ -8,7 +8,6 @@ import {
   WISHLIST_REMOVE_ITEM,
 } from "../constants/cartConstands";
 
-
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`);
   // console.log(data);
@@ -28,6 +27,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
+
+
+
+
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,
@@ -43,6 +46,8 @@ export const saveShippingAddress = (data) => (dispatch) => {
   localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
 
+
+
 export const savePaymentMethod = (data) => (dispatch) => {
   dispatch({
     type: CART_SAVE_PAYMENT_METHOD,
@@ -53,8 +58,8 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
 
 
-export const addToWishlist = (id,qty) => async (dispatch, getState) => {
-  console.log('evedeemod');
+export const addToWishlist = (id, qty) => async (dispatch, getState) => {
+  console.log("evedeemod");
   const { data } = await axios.get(`/api/products/${id}`);
   // console.log(data);
   dispatch({
@@ -71,14 +76,18 @@ export const addToWishlist = (id,qty) => async (dispatch, getState) => {
     },
   });
 
-  localStorage.setItem("wishlistItem", JSON.stringify(getState().wishlist.wishlistItem));
+  localStorage.setItem(
+    "wishlistItem",
+    JSON.stringify(getState().wishlist.wishlistItem)
+  );
 };
 export const removeFromWishlist = (id) => (dispatch, getState) => {
   dispatch({
     type: WISHLIST_REMOVE_ITEM,
     payload: id,
   });
-  localStorage.setItem("wishlistItem", JSON.stringify(getState().wishlist.wishlistItem));
+  localStorage.setItem(
+    "wishlistItem",
+    JSON.stringify(getState().wishlist.wishlistItem)
+  );
 };
-
-
