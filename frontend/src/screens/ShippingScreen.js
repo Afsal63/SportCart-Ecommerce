@@ -11,7 +11,7 @@ import { saveShippingAddress } from '../actions/cartAction'
 
 
 const ShippingScreen = () => {
-    const cart =useSelector(state=> state.cart)
+    const cart = useSelector((state) => state.cart)
     const navigate =useNavigate()
     const{shippingAddress}=cart
     const [address,setAddress]=useState(shippingAddress.address)
@@ -28,7 +28,7 @@ const ShippingScreen = () => {
     }
  useEffect(()=>{
     
- },[address,city,postalCode,country])
+ },[])
 
 
   return (

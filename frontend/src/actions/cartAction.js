@@ -38,13 +38,15 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   });
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
+
 export const saveShippingAddress = (data) => (dispatch) => {
   dispatch({
     type: CART_SAVE_SHIPPING_ADDRESS,
     payload: data,
   });
-  localStorage.setItem("shippingAddress", JSON.stringify(data));
+  localStorage.setItem('shippingAddress', JSON.stringify(data));
 };
+
 
 
 
@@ -59,7 +61,7 @@ export const savePaymentMethod = (data) => (dispatch) => {
 
 
 export const addToWishlist = (id, qty) => async (dispatch, getState) => {
-  console.log("evedeemod");
+  
   const { data } = await axios.get(`/api/products/${id}`);
   // console.log(data);
   dispatch({

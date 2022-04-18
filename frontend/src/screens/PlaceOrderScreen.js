@@ -20,9 +20,11 @@ const PlaceOrderScreen = () => {
 
   const applyCoopen = useSelector((state) => state.applyCoopen);
   const { coopenAppleys } = applyCoopen;
-  console.log(coopenAppleys.coopenDiscount);
+ 
 
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
   const navigate = useNavigate();
 
   const coopenHandler = (id) => {
@@ -91,13 +93,13 @@ const PlaceOrderScreen = () => {
           <ListGroup variant="flush">
             <Card className="p-5">
               <ListGroup.Item>
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Address:</strong>
-                  {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
-                  {cart.shippingAddress.postalCode},{" "}
-                  {cart.shippingAddress.country}
-                </p>
+              <h2>Shipping</h2>
+                                <p>
+                                    <strong>Address:</strong>
+                                    {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
+                                    {cart.shippingAddress.postalCode},{' '}
+                                    {cart.shippingAddress.country}
+                                </p>
               </ListGroup.Item>
               <ListGroup.Item>
                 <h2>Payment Method</h2>

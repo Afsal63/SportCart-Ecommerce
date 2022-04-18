@@ -56,15 +56,7 @@ const responseSuccessGoogle=(response)=>{
   
      
     
-  //   axios({
-  //     method:'POST',
-  //     url :'/api/googlelogin',
-  //     data:{tokenId:response.tokenId}
-  //   }).then(response=>{
-  // console.log("google login succuss",response);
-  // navigate(`/${redirect}`)
-  //   }
-  //   )
+  
 
   }
     
